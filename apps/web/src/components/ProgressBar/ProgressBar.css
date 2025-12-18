@@ -1,0 +1,11 @@
+.progress-bar-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.progress-text {
+  display: block;
+  margin-top: 8px;
+}

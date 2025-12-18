@@ -1,0 +1,169 @@
+.swipe-card {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition: transform 0.15s ease-out, box-shadow 0.2s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+  overflow: hidden;
+  animation: cardEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.swipe-card.dragging {
+  cursor: grabbing;
+  transition: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Direction indicators */
+.direction-indicator {
+  position: absolute;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.know-indicator {
+  top: 20px;
+  right: 20px;
+  background: #52c41a;
+  color: white;
+  transform: rotate(15deg);
+}
+
+.dont-know-indicator {
+  top: 20px;
+  left: 20px;
+  background: #ff4d4f;
+  color: white;
+  transform: rotate(-15deg);
+}
+
+.skip-indicator {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #faad14;
+  color: white;
+}
+
+/* Show indicators based on swipe direction */
+.swipe-card.swiping-right .know-indicator {
+  opacity: 1;
+}
+
+.swipe-card.swiping-left .dont-know-indicator {
+  opacity: 1;
+}
+
+.swipe-card.swiping-up .skip-indicator {
+  opacity: 1;
+}
+
+/* Direction-based background gradient */
+.swipe-card.swiping-right {
+  background: linear-gradient(135deg, #fff 60%, #f6ffed 100%);
+  box-shadow: 4px 0 20px rgba(82, 196, 26, 0.3);
+}
+
+.swipe-card.swiping-left {
+  background: linear-gradient(225deg, #fff 60%, #fff1f0 100%);
+  box-shadow: -4px 0 20px rgba(255, 77, 79, 0.3);
+}
+
+.swipe-card.swiping-up {
+  background: linear-gradient(180deg, #fff 60%, #fffbe6 100%);
+  box-shadow: 0 -4px 20px rgba(250, 173, 20, 0.3);
+}
+
+/* Card content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 40px;
+}
+
+.level-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 12px;
+}
+
+.word-text {
+  font-size: 42px;
+  font-weight: 600;
+  margin: 0;
+  color: #262626;
+  text-align: center;
+  word-break: break-word;
+}
+
+.word-pos {
+  font-size: 16px;
+  color: #8c8c8c;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* Exit animations */
+.swipe-card.exiting-right,
+.swipe-card.exiting-left,
+.swipe-card.exiting-up {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.swipe-card.exiting-right {
+  background: linear-gradient(135deg, #fff 40%, #f6ffed 100%);
+}
+
+.swipe-card.exiting-left {
+  background: linear-gradient(225deg, #fff 40%, #fff1f0 100%);
+}
+
+.swipe-card.exiting-up {
+  background: linear-gradient(180deg, #fff 40%, #fffbe6 100%);
+}
+
+.swipe-card.exiting-right .know-indicator,
+.swipe-card.exiting-left .dont-know-indicator,
+.swipe-card.exiting-up .skip-indicator {
+  opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 400px) {
+  .swipe-card {
+    width: 280px;
+    height: 360px;
+  }
+
+  .word-text {
+    font-size: 32px;
+  }
+}
