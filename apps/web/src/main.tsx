@@ -3,12 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { ConfigProvider } from 'antd';
 import { AppProvider } from './context/AppContext';
 import { App } from './components/App/App';
-import wordsData from '../../../shared/data/words.json';
-import type { Word } from './types';
+import { wordsData } from '@ai-workshop/shared-data';
 import './index.css';
 
 // Cast words to proper type
-const words = wordsData.words as Word[];
+const words = wordsData.words;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

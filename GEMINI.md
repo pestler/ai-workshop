@@ -2,51 +2,68 @@
 
 ## Project Overview
 
-This project is a comprehensive English language learning ecosystem designed to help users master the 3000 most common English words from the Oxford Dictionary. It consists of two main components:
+This project is a comprehensive English language learning ecosystem built as a **monorepo using Nx and pnpm**. It is designed to help users master the 3000 most common English words.
 
-1.  **Web Application (Quiz):** A web-based quiz application with a Tinder-style card interface. Users can swipe right for words they know and left for words they don't. The application tracks progress, provides statistics, and saves results to the browser's LocalStorage.
-2.  **Telegram Bot (Spaced Repetition):** A Telegram bot designed for interval-based learning. It takes the list of unknown words from the web application and automatically sends them to the user for review based on a spaced repetition algorithm.
+The monorepo contains the following packages:
 
-The front-end is built with **React** and **TypeScript**, using **Vite** as a build tool. It uses **Ant Design** for UI components.
+-   `apps/web`: A React + Vite web application that provides a Tinder-style quiz for vocabulary testing.
+-   `packages/shared-data`: A shared library that contains the JSON data for the 3000 English words.
+
+The goal is to create an integrated system where a web app and potentially other applications (like a Telegram bot) can share code, types, and data.
 
 ## Building and Running the Project
 
-The web application is located in the `apps/web` directory.
+This is an Nx-managed monorepo. All commands should be run from the **root directory**.
 
 ### Key Commands:
 
-*   **Install Dependencies:**
+-   **Install Dependencies:**
     ```bash
-    npm install
+    pnpm install
     ```
-*   **Run in Development Mode:**
-    ```bash
-    npm run dev
-    ```
-    This will start the Vite development server, typically available at `http://localhost:5173`.
+    This command installs dependencies for all packages in the workspace.
 
-*   **Build for Production:**
+-   **Run the Web App in Development Mode:**
     ```bash
-    npm run build
+    pnpm nx serve web
     ```
-    This command type-checks the code and bundles the application for production into the `apps/web/dist` directory.
+    This will start the Vite development server for the `web` app, typically available at `http://localhost:5173`.
 
-*   **Lint the Code:**
+-   **Build a Package:**
+    You can build any package (app or library) using the `build` command. For example, to build the `shared-data` library:
     ```bash
-    npm run lint
+    pnpm nx build @ai-workshop/shared-data
     ```
-    This command runs ESLint to check for code quality and style issues.
+    To build the web app for production:
+    ```bash
+    pnpm nx build web
+    ```
+    This command bundles the application into the `dist/apps/web` directory.
 
-*   **Preview Production Build:**
+-   **Linting:**
+    To lint a specific project:
     ```bash
-    npm run preview
+    pnpm nx lint web
     ```
-    This command serves the production build locally to test it before deployment.
+    To lint the entire workspace:
+    ```bash
+    pnpm nx run-many --target=lint
+    ```
+
+### Viewing the Project Graph
+
+Nx can visualize the dependencies between all the packages in the workspace. This is very useful for understanding the architecture.
+```bash
+pnpm nx graph
+```
+This will open a dependency graph in your browser.
 
 ## Development Conventions
 
-*   **Technology Stack:** The project uses React with TypeScript.
-*   **Styling:** Component-specific CSS files are used for styling.
-*   **State Management:** The main application state is managed through React Context (`AppContext.tsx`).
-*   **Data Persistence:** User progress (known/unknown words) is stored in the browser's LocalStorage via a dedicated `storageService.ts`.
-*   **Code Quality:** ESLint is configured for linting. The configuration can be found in `apps/web/eslint.config.js`.
+-   **Monorepo Management:** The project is managed by Nx and uses `pnpm` for package management.
+-   **Shared Code:** Common code, data, or types that need to be used across multiple applications should be placed in libraries inside the `packages/` directory.
+-   **Technology Stack:**
+    -   **Web App:** React, TypeScript, Vite
+    -   **UI:** Ant Design
+-   **Code Quality:** ESLint is configured and managed by Nx. Configuration can be found in the root `.eslintrc.json` and is extended in project-specific configs.
+-   **TypeScript Paths:** Path aliases (e.g., `@ai-workshop/shared-data`) are managed by Nx and defined in the root `tsconfig.base.json`. This allows for clean, direct imports between packages.
