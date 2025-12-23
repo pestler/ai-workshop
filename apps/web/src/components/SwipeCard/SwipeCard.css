@@ -129,6 +129,12 @@
   font-style: italic;
 }
 
+.word-translation {
+  font-size: 24px;
+  color: #595959;
+  margin-top: 20px;
+}
+
 /* Exit animations */
 .swipe-card.exiting-right,
 .swipe-card.exiting-left,
