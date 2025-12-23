@@ -6,8 +6,8 @@ import { App } from './components/App/App';
 import { wordsData } from '@ai-workshop/shared-data';
 import './index.css';
 
-// Cast words to proper type
-const words = wordsData.words;
+// Convert the new data structure into a single array of words.
+const words = Object.values(wordsData).flat();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
