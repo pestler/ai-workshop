@@ -1,0 +1,9 @@
+[build]
+  command = "npx nx build my-app"
+  publish = "dist/apps/my-app"
+
+[context.production]
+  command = "npx nx build my-app --configuration=production"
+
+[context.deploy-preview]
+  command = "npx nx build my-app --configuration=staging"
