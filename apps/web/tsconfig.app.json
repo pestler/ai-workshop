@@ -28,7 +28,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../packages/shared-data/tsconfig.json"
+      "path": "../../packages/tsconfig.lib.json"
     }
   ]
 }
