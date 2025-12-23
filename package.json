@@ -35,5 +35,8 @@
     "vite": "^7.0.0",
     "vite-tsconfig-paths": "^6.0.3",
     "vitest": "^4.0.0"
+  },
+  "dependencies": {
+    "@iamtraction/google-translate": "^2.0.1"
   }
 }
