@@ -4,6 +4,7 @@ export interface Word {
   word: string;
   pos: string; // Part of speech: "n.", "v.", "adj.", etc.
   level: CEFRLevel;
+  russian_translation?: string;
 }
 
 // CEFR language proficiency levels

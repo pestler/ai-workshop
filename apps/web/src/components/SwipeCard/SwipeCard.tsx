@@ -60,6 +60,9 @@ export function SwipeCard({
         </Tag>
         <h2 className="word-text">{word.word}</h2>
         <p className="word-pos">{word.pos}</p>
+        <p className="word-translation">
+          {word.russian_translation || 'Перевода нет'}
+        </p>
       </div>
     </div>
   );
